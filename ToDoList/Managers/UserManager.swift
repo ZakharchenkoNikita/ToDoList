@@ -11,7 +11,6 @@ class UserManager {
     static let shared = UserManager()
     
     var lists: [ToDoList] = [ToDoList(name: "Ваш первый список", tasks: nil)]
-    var tasks: [Task] = []
     
     private init() {}
 }

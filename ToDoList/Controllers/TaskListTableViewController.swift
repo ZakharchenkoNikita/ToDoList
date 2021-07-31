@@ -9,8 +9,7 @@ import UIKit
 
 class TaskListTableViewController: UITableViewController {
 
-    let manager = UserManager.shared
-    let lists = ToDoList.getToDoLists()
+    var lists = ToDoList.getToDoLists()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -101,10 +100,10 @@ extension TaskListTableViewController {
         let cancelAction = UIAlertAction(title: "Отмена", style: .cancel, handler: nil)
         let addAction = UIAlertAction(title: "Добавить", style: .default) { _ in
             guard let textField = alert.textFields?.first else { return }
-            guard let textField = textField.text, !textField.isEmpty else { return }
+            guard let name = textField.text, !name.isEmpty else { return }
             
-            self.manager.lists.insert(ToDoList(name: textField, tasks: nil), at: 0)
-            print(self.manager.lists)
+            self.lists.insert(ToDoList(name: name, tasks: nil), at: 0)
+            self.tableView.reloadData()
         }
         
         alert.addAction(addAction)

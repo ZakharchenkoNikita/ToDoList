@@ -17,13 +17,3 @@ extension ToDoList {
         UserManager.shared.lists
     }
 }
-
-
-//extension ToDoList {
-//
-//    // Возвращает массив со списками задач
-//    static func getToDoLists() -> [ToDoList] {
-//        [ToDoList(name: "Current", tasks: Task.getCurrentTasks()),
-//         ToDoList(name: "Week", tasks: Task.getWeekTasks())]
-//    }
-//}
