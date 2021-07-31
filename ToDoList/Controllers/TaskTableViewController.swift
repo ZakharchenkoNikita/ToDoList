@@ -28,6 +28,7 @@ class TaskTableViewController: UITableViewController {
         
         if let task = list.tasks?[indexPath.row] {
             content.text = task.title
+            content.secondaryText = task.isDone ? "выполнена" : ""
             content.image = UIImage(systemName: "clock")
         }
         
@@ -39,15 +40,13 @@ class TaskTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         var status = true
         
-        let isDone = UIContextualAction(style: .destructive, title: nil) { _, _, _ in
+        let isDone = UIContextualAction(style: .normal, title: nil) { _, _, _ in
             
             switch status {
             case false:
-                self.list.tasks?[indexPath.row].isDone = status
+                self.getRowPostiton(indexPath: indexPath, isDone: status)
             default:
-                guard var element = self.list.tasks?.remove(at: indexPath.row) else { return }
-                element.isDone = status
-                self.list.tasks?.append(element)
+                self.getRowPostiton(indexPath: indexPath, isDone: status)
             }
             self.tableView.reloadData()
         }
@@ -64,6 +63,16 @@ class TaskTableViewController: UITableViewController {
         }
         
         return UISwipeActionsConfiguration(actions: [isDone])
+    }
+    
+    override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let delete = UIContextualAction(style: .normal, title: nil) { _, _, _ in
+            self.list.tasks?.remove(at: indexPath.row)
+            self.tableView.reloadData()
+        }
+        delete.image = UIImage(systemName: "trash.fill")
+        delete.backgroundColor = #colorLiteral(red: 0.7450980544, green: 0.1568627506, blue: 0.07450980693, alpha: 1)
+        return UISwipeActionsConfiguration(actions: [delete])
     }
     /*
     // Override to support conditional editing of the table view.
@@ -109,5 +118,17 @@ class TaskTableViewController: UITableViewController {
         // Pass the selected object to the new view controller.
     }
     */
-
+    // MARK: Private Methods
+    private func getRowPostiton(indexPath: IndexPath, isDone: Bool) {
+        guard var element = list.tasks?.remove(at: indexPath.row) else { return }
+        
+        element.isDone = isDone
+        
+        switch isDone {
+        case false:
+            list.tasks?.insert(element, at: 0)
+        default:
+            list.tasks?.append(element)
+        }
+    }
 }
