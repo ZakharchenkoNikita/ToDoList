@@ -14,24 +14,22 @@ class TaskListTableViewController: UITableViewController {
     }
 
     // MARK: - Table view data source
-
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        0
-    }
-
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        0
+        10
     }
 
-    /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
-        // Configure the cell...
-
+        let cell = tableView.dequeueReusableCell(withIdentifier: "taskList", for: indexPath)
+        var content = cell.defaultContentConfiguration()
+        
+        content.image = UIImage(systemName: "list.triangle")
+        content.text = "test"
+        content.secondaryText = "1"
+        
+        cell.contentConfiguration = content
+        
         return cell
     }
-    */
 
     /*
     // Override to support conditional editing of the table view.
