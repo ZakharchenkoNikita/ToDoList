@@ -13,8 +13,8 @@ struct ToDoList {
 extension ToDoList {
     
     // Возвращает массив со списками задач
-    static func getToDoLists() -> [ToDoList] {
-        [ToDoList(name: "Current", tasks: Task.CurrentTasks),
-         ToDoList(name: "Week", tasks: Task.WeeekTasks)]
+    static func getAllLists() -> [ToDoList] {
+        [ToDoList(name: "Current", tasks: Task.getCurrentTasks()),
+         ToDoList(name: "Week", tasks: Task.getWeekTasks())]
     }
 }
