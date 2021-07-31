@@ -10,6 +10,7 @@ import UIKit
 class TaskListTableViewController: UITableViewController {
 
     let lists = ToDoList.getToDoLists()
+    let manager = UserManager.shared
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,7 +29,9 @@ class TaskListTableViewController: UITableViewController {
         
         content.image = UIImage(systemName: "list.triangle")
         content.text = list.name
-        content.secondaryText = String(list.tasks.count)
+        if let taskCount = list.tasks?.count {
+            content.secondaryText = String(taskCount)
+        }
         
         cell.contentConfiguration = content
         
@@ -81,5 +84,35 @@ class TaskListTableViewController: UITableViewController {
     */
     
     @IBAction func addListButtonPressed(_ sender: UIBarButtonItem) {
+        addNewList()
+    }
+}
+
+extension TaskListTableViewController {
+    private func addNewList() {
+        let alert = UIAlertController(title: "Новый список", message: nil, preferredStyle: .alert)
+
+        
+        alert.addTextField { newListTF in
+            newListTF.placeholder = "Введите название списка..."
+            newListTF.returnKeyType = .done
+        }
+        
+        let cancelAction = UIAlertAction(title: "Отмена", style: .cancel, handler: nil)
+        let addAction = UIAlertAction(title: "Добавить", style: .default) { _ in
+            guard let textField = alert.textFields?.first else { return }
+            guard let textField = textField.text, !textField.isEmpty else { return }
+            
+            self.manager.lists.append(ToDoList(name: textField, tasks: nil))
+        }
+        
+        alert.addAction(addAction)
+        alert.addAction(cancelAction)
+        
+        present(alert, animated: true, completion: nil)
+    }
+    
+    private func addNewTaskList() {
+        
     }
 }
