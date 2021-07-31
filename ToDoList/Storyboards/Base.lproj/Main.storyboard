@@ -34,7 +34,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Списки" id="G50-Vv-JbO">
-                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="add" id="ndm-nz-S6A"/>
+                        <barButtonItem key="rightBarButtonItem" style="done" systemItem="add" id="ndm-nz-S6A"/>
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2kk-2x-gUq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
