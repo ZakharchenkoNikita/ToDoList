@@ -11,3 +11,12 @@ struct User {
     let email: String
     let toDoList: [ToDoList]
 }
+
+extension User {
+    
+    // Возвращает конкретного юзера с его списком задач
+    func getUser() -> User {
+        User(login: "TestUser", password: "12345",
+             email: "testuser@gmail.com", toDoList: ToDoList.getToDoLists())
+    }
+}
