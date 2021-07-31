@@ -9,22 +9,26 @@ import UIKit
 
 class TaskListTableViewController: UITableViewController {
 
+    let lists = ToDoList.getToDoLists()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
 
     // MARK: - Table view data source
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        10
+        lists.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "taskList", for: indexPath)
         var content = cell.defaultContentConfiguration()
         
+        let list = lists[indexPath.row]
+        
         content.image = UIImage(systemName: "list.triangle")
-        content.text = "test"
-        content.secondaryText = "1"
+        content.text = list.name
+        content.secondaryText = String(list.tasks.count)
         
         cell.contentConfiguration = content
         
@@ -75,5 +79,7 @@ class TaskListTableViewController: UITableViewController {
         // Pass the selected object to the new view controller.
     }
     */
-
+    
+    @IBAction func addListButtonPressed(_ sender: UIBarButtonItem) {
+    }
 }
