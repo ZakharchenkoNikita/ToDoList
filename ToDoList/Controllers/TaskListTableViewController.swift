@@ -9,8 +9,8 @@ import UIKit
 
 class TaskListTableViewController: UITableViewController {
 
-    let lists = ToDoList.getToDoLists()
     let manager = UserManager.shared
+    let lists = ToDoList.getToDoLists()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -103,7 +103,8 @@ extension TaskListTableViewController {
             guard let textField = alert.textFields?.first else { return }
             guard let textField = textField.text, !textField.isEmpty else { return }
             
-            self.manager.lists.append(ToDoList(name: textField, tasks: nil))
+            self.manager.lists.insert(ToDoList(name: textField, tasks: nil), at: 0)
+            print(self.manager.lists)
         }
         
         alert.addAction(addAction)
