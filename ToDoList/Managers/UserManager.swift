@@ -8,7 +8,7 @@
 import Foundation
 
 class UserManager {
-    let shared = UserManager()
+    static let shared = UserManager()
     
     var lists: [ToDoList] = []
     var tasks: [Task] = []
