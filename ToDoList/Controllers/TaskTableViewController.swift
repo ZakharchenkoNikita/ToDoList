@@ -9,7 +9,7 @@ import UIKit
 
 class TaskTableViewController: UITableViewController {
 
-    var list: ToDoList!
+    var list: ToDoList! = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,6 +28,7 @@ class TaskTableViewController: UITableViewController {
         
         if let task = list.tasks?[indexPath.row] {
             content.text = task.title
+            content.image = UIImage(systemName: "clock")
         }
         
         cell.contentConfiguration = content
@@ -35,6 +36,35 @@ class TaskTableViewController: UITableViewController {
         return cell
     }
 
+    override func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        var status = true
+        
+        let isDone = UIContextualAction(style: .destructive, title: nil) { _, _, _ in
+            
+            switch status {
+            case false:
+                self.list.tasks?[indexPath.row].isDone = status
+            default:
+                guard var element = self.list.tasks?.remove(at: indexPath.row) else { return }
+                element.isDone = status
+                self.list.tasks?.append(element)
+            }
+            self.tableView.reloadData()
+        }
+        
+        switch list.tasks?[indexPath.row].isDone {
+        case false:
+            isDone.image = UIImage(systemName: "checkmark.circle")
+            isDone.backgroundColor = #colorLiteral(red: 0.1764705926, green: 0.4980392158, blue: 0.7568627596, alpha: 1)
+            status = true
+        default:
+            isDone.image = UIImage(systemName: "checkmark.circle.fill")
+            isDone.backgroundColor = #colorLiteral(red: 0.3411764801, green: 0.6235294342, blue: 0.1686274558, alpha: 1)
+            status = false
+        }
+        
+        return UISwipeActionsConfiguration(actions: [isDone])
+    }
     /*
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
