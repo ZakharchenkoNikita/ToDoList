@@ -11,3 +11,9 @@ struct User {
     let email: String
     let toDoList: [ToDoList]
 }
+
+extension User {
+    static func getUserData() -> [User] {
+        []
+    }
+}
