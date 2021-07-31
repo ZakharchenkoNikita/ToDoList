@@ -9,29 +9,31 @@ import UIKit
 
 class TaskListTableViewController: UITableViewController {
 
+    let lists = ToDoList.getToDoLists()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
 
     // MARK: - Table view data source
-
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        0
-    }
-
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        0
+        lists.count
     }
 
-    /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
-        // Configure the cell...
-
+        let cell = tableView.dequeueReusableCell(withIdentifier: "taskList", for: indexPath)
+        var content = cell.defaultContentConfiguration()
+        
+        let list = lists[indexPath.row]
+        
+        content.image = UIImage(systemName: "list.triangle")
+        content.text = list.name
+        content.secondaryText = String(list.tasks.count)
+        
+        cell.contentConfiguration = content
+        
         return cell
     }
-    */
 
     /*
     // Override to support conditional editing of the table view.
