@@ -9,7 +9,7 @@ import UIKit
 
 class TaskTableViewController: UITableViewController {
 
-    var list: ToDoList! = nil
+    var list: ToDoList!
     
     override func viewDidLoad() {
         super.viewDidLoad()
