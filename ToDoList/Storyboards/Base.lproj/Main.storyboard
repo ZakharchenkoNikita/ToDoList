@@ -3,6 +3,7 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -61,6 +62,9 @@
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="qJZ-3H-Q8z" kind="show" id="Fje-VA-YRW"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -73,6 +77,35 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LZ0-Ug-fe0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="778" y="50"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="DjE-JK-C6N">
+            <objects>
+                <viewController id="qJZ-3H-Q8z" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="DEe-3C-BRJ">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="e5A-XC-UFT">
+                                <rect key="frame" x="20" y="160" width="374" height="19.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="LH2-tu-T9d"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="LH2-tu-T9d" firstAttribute="trailing" secondItem="e5A-XC-UFT" secondAttribute="trailing" constant="20" id="AjJ-80-Xkv"/>
+                            <constraint firstItem="e5A-XC-UFT" firstAttribute="centerX" secondItem="DEe-3C-BRJ" secondAttribute="centerX" id="Yyr-o5-jXL"/>
+                            <constraint firstItem="e5A-XC-UFT" firstAttribute="leading" secondItem="LH2-tu-T9d" secondAttribute="leading" constant="20" id="i8X-wf-WtD"/>
+                            <constraint firstItem="e5A-XC-UFT" firstAttribute="top" secondItem="LH2-tu-T9d" secondAttribute="top" constant="20" id="rUS-NR-N1m"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="aQf-hf-ZWx"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cpv-U5-ipe" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1597" y="50"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="uxx-ym-0kK">
