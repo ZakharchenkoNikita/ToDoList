@@ -17,8 +17,8 @@ class TaskTableViewController: UITableViewController {
         title = list.name
     }
     
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(true)
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(true)
         delegate.saveData(ToDoList: list)
     }
     
@@ -53,7 +53,6 @@ class TaskTableViewController: UITableViewController {
             default:
                 self.getRowPostiton(indexPath: indexPath, isDone: status)
             }
-            self.delegate.saveData(ToDoList: self.list)
             self.tableView.reloadData()
         }
         
