@@ -19,6 +19,8 @@
 		1130FE8326B488480072C03D /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1130FE8226B488480072C03D /* UserManager.swift */; };
 		1130FE8926B6AB7E0072C03D /* FavoritesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1130FE8826B6AB7E0072C03D /* FavoritesTableViewController.swift */; };
 		1130FE8B26B6ABA90072C03D /* TaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1130FE8A26B6ABA90072C03D /* TaskViewController.swift */; };
+		1130FE8E26B742320072C03D /* TaskTableViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1130FE8D26B742320072C03D /* TaskTableViewControllerDelegate.swift */; };
+		1130FE9026B743280072C03D /* TaskViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1130FE8F26B743280072C03D /* TaskViewControllerDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +38,8 @@
 		1130FE8226B488480072C03D /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		1130FE8826B6AB7E0072C03D /* FavoritesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesTableViewController.swift; sourceTree = "<group>"; };
 		1130FE8A26B6ABA90072C03D /* TaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskViewController.swift; sourceTree = "<group>"; };
+		1130FE8D26B742320072C03D /* TaskTableViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskTableViewControllerDelegate.swift; sourceTree = "<group>"; };
+		1130FE8F26B743280072C03D /* TaskViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskViewControllerDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,6 +75,7 @@
 				1130FE7626B486D30072C03D /* Models */,
 				1130FE7526B486CA0072C03D /* Storyboards */,
 				1130FE7426B486C30072C03D /* Controllers */,
+				1130FE8C26B7421D0072C03D /* Protocols */,
 				1130FE7226B486B50072C03D /* Managers */,
 				1130FE7326B486BC0072C03D /* Support files */,
 			);
@@ -123,6 +128,15 @@
 				1130FE7C26B487820072C03D /* Task.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		1130FE8C26B7421D0072C03D /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				1130FE8D26B742320072C03D /* TaskTableViewControllerDelegate.swift */,
+				1130FE8F26B743280072C03D /* TaskViewControllerDelegate.swift */,
+			);
+			path = Protocols;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -197,11 +211,13 @@
 			files = (
 				1130FE7F26B487D20072C03D /* TaskListTableViewController.swift in Sources */,
 				1130FE5826B484F20072C03D /* AppDelegate.swift in Sources */,
+				1130FE8E26B742320072C03D /* TaskTableViewControllerDelegate.swift in Sources */,
 				1130FE5A26B484F20072C03D /* SceneDelegate.swift in Sources */,
 				1130FE8926B6AB7E0072C03D /* FavoritesTableViewController.swift in Sources */,
 				1130FE7D26B487820072C03D /* Task.swift in Sources */,
 				1130FE8126B487F00072C03D /* TaskTableViewController.swift in Sources */,
 				1130FE8326B488480072C03D /* UserManager.swift in Sources */,
+				1130FE9026B743280072C03D /* TaskViewControllerDelegate.swift in Sources */,
 				1130FE7B26B487710072C03D /* ToDoList.swift in Sources */,
 				1130FE8B26B6ABA90072C03D /* TaskViewController.swift in Sources */,
 			);

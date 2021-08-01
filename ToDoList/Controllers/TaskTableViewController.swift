@@ -7,13 +7,9 @@
 
 import UIKit
 
-protocol TaskViewControllerDelegate {
-    func updateTask(title: String)
-    func createTask(task: Task)
-}
-
 class TaskTableViewController: UITableViewController {
     
+    // MARK: Properties
     var list: ToDoList!
     var delegate: TaskTableViewControllerDelegate!
     
@@ -22,7 +18,13 @@ class TaskTableViewController: UITableViewController {
         title = list.name
     }
     
-    // MARK: - Table view data source
+    @IBAction func backButtonPressed(_ sender: UIBarButtonItem) {
+        delegate.saveData(toDoList: list)
+    }
+}
+
+// MARK: - Table view data source
+extension TaskTableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         list.tasks.count
     }
@@ -45,13 +47,13 @@ class TaskTableViewController: UITableViewController {
         var status = true
         
         let isDone = UIContextualAction(style: .normal, title: nil) { _, _, _ in
-            
             switch status {
             case false:
                 self.getRowPostiton(indexPath: indexPath, isDone: status)
             default:
                 self.getRowPostiton(indexPath: indexPath, isDone: status)
             }
+            
             self.delegate.saveData(toDoList: self.list)
             self.tableView.reloadData()
         }
@@ -80,31 +82,13 @@ class TaskTableViewController: UITableViewController {
         delete.backgroundColor = #colorLiteral(red: 0.7450980544, green: 0.1568627506, blue: 0.07450980693, alpha: 1)
         return UISwipeActionsConfiguration(actions: [delete])
     }
-    
-    
-    @IBAction func backButtonPressed(_ sender: UIBarButtonItem) {
-        delegate.saveData(toDoList: list)
-    }
-    
-    // MARK: Private Methods
-    private func getRowPostiton(indexPath: IndexPath, isDone: Bool) {
-        var element = list.tasks.remove(at: indexPath.row)
-        
-        element.isDone = isDone
-        
-        switch isDone {
-        case false:
-            list.tasks.insert(element, at: 0)
-        default:
-            list.tasks.append(element)
-        }
-    }
 }
 
-
+// MARK: - TaskViewControllerDelegate
 extension TaskTableViewController: TaskViewControllerDelegate {
     func updateTask(title: String) {
         guard let indexPath = tableView.indexPathForSelectedRow else { return }
+        
         list.tasks[indexPath.row].title = title
         delegate.saveData(toDoList: list)
         tableView.reloadData()
@@ -135,5 +119,21 @@ extension TaskTableViewController {
         }
         
         taskVC.segueIdentifire = identifier
+    }
+}
+
+// MARK: Private Methods
+extension TaskTableViewController {
+    private func getRowPostiton(indexPath: IndexPath, isDone: Bool) {
+        var element = list.tasks.remove(at: indexPath.row)
+        
+        element.isDone = isDone
+        
+        switch isDone {
+        case false:
+            list.tasks.insert(element, at: 0)
+        default:
+            list.tasks.append(element)
+        }
     }
 }

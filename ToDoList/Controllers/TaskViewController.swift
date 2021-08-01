@@ -11,10 +11,12 @@ class TaskViewController: UIViewController {
         
     @IBOutlet weak var taskTextField: UITextField!
     
+    // MARK: Properties
     var delegate: TaskViewControllerDelegate!
     var currentTask: Task!
     var segueIdentifire = ""
     
+    // MARK: Ovveride methods
     override func viewDidLoad() {
         super.viewDidLoad()
         updateUI()
@@ -23,8 +25,11 @@ class TaskViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         updateData()
-    }    
+    }
+}
 
+// MARK: Private Methods
+extension TaskViewController {
     private func updateUI() {
         guard let task = currentTask else { return }
         taskTextField.text = task.title
