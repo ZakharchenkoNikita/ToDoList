@@ -7,6 +7,11 @@
 
 import UIKit
 
+protocol TaskViewControllerDelegate {
+    func updateTask(title: String)
+    func createTask(task: Task)
+}
+
 class TaskTableViewController: UITableViewController {
 
     var list: ToDoList!
@@ -24,18 +29,17 @@ class TaskTableViewController: UITableViewController {
     
     // MARK: - Table view data source
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        list.tasks?.count ?? 0
+        list.tasks.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "task", for: indexPath)
         var content = cell.defaultContentConfiguration()
         
-        if let task = list.tasks?[indexPath.row] {
+       let task = list.tasks[indexPath.row]
             content.text = task.title
             content.secondaryText = task.isDone ? "выполнена" : ""
             content.image = UIImage(systemName: "clock")
-        }
         
         cell.contentConfiguration = content
         
@@ -56,7 +60,7 @@ class TaskTableViewController: UITableViewController {
             self.tableView.reloadData()
         }
         
-        switch list.tasks?[indexPath.row].isDone {
+        switch list.tasks[indexPath.row].isDone {
         case false:
             isDone.image = UIImage(systemName: "checkmark.circle")
             isDone.backgroundColor = #colorLiteral(red: 0.1764705926, green: 0.4980392158, blue: 0.7568627596, alpha: 1)
@@ -72,7 +76,7 @@ class TaskTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let delete = UIContextualAction(style: .normal, title: nil) { _, _, _ in
-            self.list.tasks?.remove(at: indexPath.row)
+            self.list.tasks.remove(at: indexPath.row)
             self.tableView.reloadData()
         }
         delete.image = UIImage(systemName: "trash.fill")
@@ -82,15 +86,48 @@ class TaskTableViewController: UITableViewController {
 
     // MARK: Private Methods
     private func getRowPostiton(indexPath: IndexPath, isDone: Bool) {
-        guard var element = list.tasks?.remove(at: indexPath.row) else { return }
+        var element = list.tasks.remove(at: indexPath.row)
         
         element.isDone = isDone
         
         switch isDone {
         case false:
-            list.tasks?.insert(element, at: 0)
+            list.tasks.insert(element, at: 0)
         default:
-            list.tasks?.append(element)
+            list.tasks.append(element)
         }
+    }
+}
+
+
+extension TaskTableViewController: TaskViewControllerDelegate {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let identifier = segue.identifier,
+              let taskVC = segue.destination as? TaskViewController else { return }
+        
+        switch segue.identifier {
+        case "editingTask":
+            guard let indexPath = tableView.indexPathForSelectedRow else { return }
+            let task = list.tasks[indexPath.row]
+            
+            taskVC.currentTask = task
+            taskVC.delegate = self
+        default:
+            taskVC.delegate = self
+        }
+        
+        taskVC.segueIdentifire = identifier
+    }
+
+    func updateTask(title: String) {
+        guard let indexPath = tableView.indexPathForSelectedRow else { return }
+        
+        list.tasks[indexPath.row].title = title
+        tableView.reloadData()
+    }
+    
+    func createTask(task: Task) {
+        list.tasks.insert(task, at: 0)
+        tableView.reloadData()
     }
 }

@@ -17,6 +17,7 @@ class TaskListTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         navigationItem.leftBarButtonItem = editButtonItem
     }
     
@@ -50,7 +51,8 @@ extension TaskListTableViewController {
         
         content.image = UIImage(systemName: "list.triangle")
         content.text = list.name
-        if let taskCount = list.tasks?.count, taskCount > 0 {
+        let taskCount = list.tasks.count
+        if taskCount > 0 {
             content.secondaryText = String(taskCount)
         }
         
@@ -80,7 +82,7 @@ extension TaskListTableViewController {
 extension TaskListTableViewController: TaskTableViewControllerDelegate {
     func saveData(ToDoList: ToDoList) {
         guard let indexPath = tableView.indexPathForSelectedRow else { return }
-        
+
         lists.remove(at: indexPath.row)
         lists.insert(ToDoList, at: indexPath.row)
         tableView.reloadData()
@@ -103,7 +105,7 @@ extension TaskListTableViewController {
             guard let textField = alert.textFields?.first else { return }
             guard let name = textField.text, !name.isEmpty else { return }
             
-            self.lists.insert(ToDoList(name: name, tasks: nil), at: 0)
+            self.lists.insert(ToDoList(name: name, tasks: []), at: 0)
             self.tableView.reloadData()
         }
         

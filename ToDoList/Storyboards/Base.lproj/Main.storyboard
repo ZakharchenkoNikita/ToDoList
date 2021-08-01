@@ -177,10 +177,13 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="aQf-hf-ZWx"/>
+                    <connections>
+                        <outlet property="taskTextField" destination="e5A-XC-UFT" id="uQ4-mp-e92"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cpv-U5-ipe" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1597" y="50"/>
+            <point key="canvasLocation" x="1595.6521739130435" y="49.553571428571423"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="uxx-ym-0kK">
