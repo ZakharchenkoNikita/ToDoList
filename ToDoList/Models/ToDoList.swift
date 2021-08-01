@@ -7,7 +7,7 @@
 
 struct ToDoList {
     let name: String
-    var tasks: [Task]?
+    var tasks: [Task]
 }
 
 extension ToDoList {
