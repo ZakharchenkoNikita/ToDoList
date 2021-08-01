@@ -17,6 +17,8 @@
 		1130FE7F26B487D20072C03D /* TaskListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1130FE7E26B487D20072C03D /* TaskListTableViewController.swift */; };
 		1130FE8126B487F00072C03D /* TaskTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1130FE8026B487F00072C03D /* TaskTableViewController.swift */; };
 		1130FE8326B488480072C03D /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1130FE8226B488480072C03D /* UserManager.swift */; };
+		1130FE8926B6AB7E0072C03D /* FavoritesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1130FE8826B6AB7E0072C03D /* FavoritesTableViewController.swift */; };
+		1130FE8B26B6ABA90072C03D /* TaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1130FE8A26B6ABA90072C03D /* TaskViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +34,8 @@
 		1130FE7E26B487D20072C03D /* TaskListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListTableViewController.swift; sourceTree = "<group>"; };
 		1130FE8026B487F00072C03D /* TaskTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskTableViewController.swift; sourceTree = "<group>"; };
 		1130FE8226B488480072C03D /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
+		1130FE8826B6AB7E0072C03D /* FavoritesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesTableViewController.swift; sourceTree = "<group>"; };
+		1130FE8A26B6ABA90072C03D /* TaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +101,8 @@
 			children = (
 				1130FE7E26B487D20072C03D /* TaskListTableViewController.swift */,
 				1130FE8026B487F00072C03D /* TaskTableViewController.swift */,
+				1130FE8826B6AB7E0072C03D /* FavoritesTableViewController.swift */,
+				1130FE8A26B6ABA90072C03D /* TaskViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -192,10 +198,12 @@
 				1130FE7F26B487D20072C03D /* TaskListTableViewController.swift in Sources */,
 				1130FE5826B484F20072C03D /* AppDelegate.swift in Sources */,
 				1130FE5A26B484F20072C03D /* SceneDelegate.swift in Sources */,
+				1130FE8926B6AB7E0072C03D /* FavoritesTableViewController.swift in Sources */,
 				1130FE7D26B487820072C03D /* Task.swift in Sources */,
 				1130FE8126B487F00072C03D /* TaskTableViewController.swift in Sources */,
 				1130FE8326B488480072C03D /* UserManager.swift in Sources */,
 				1130FE7B26B487710072C03D /* ToDoList.swift in Sources */,
+				1130FE8B26B6ABA90072C03D /* TaskViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -70,10 +70,10 @@
             </objects>
             <point key="canvasLocation" x="-30" y="50"/>
         </scene>
-        <!--Table View Controller-->
+        <!--Favorites Table View Controller-->
         <scene sceneID="A7U-ZB-Jnm">
             <objects>
-                <tableViewController id="rTH-pX-rDj" sceneMemberID="viewController">
+                <tableViewController id="rTH-pX-rDj" customClass="FavoritesTableViewController" customModule="ToDoList" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="WXU-sb-3p7">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -153,10 +153,10 @@
             </objects>
             <point key="canvasLocation" x="778" y="50"/>
         </scene>
-        <!--View Controller-->
+        <!--Task View Controller-->
         <scene sceneID="DjE-JK-C6N">
             <objects>
-                <viewController id="qJZ-3H-Q8z" sceneMemberID="viewController">
+                <viewController id="qJZ-3H-Q8z" customClass="TaskViewController" customModule="ToDoList" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="DEe-3C-BRJ">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
