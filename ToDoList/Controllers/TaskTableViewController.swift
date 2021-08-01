@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol TaskViewControllerDelegate {
+    func updateList(with task: Task)
+}
+
 class TaskTableViewController: UITableViewController {
 
     var list: ToDoList!
@@ -95,6 +99,26 @@ class TaskTableViewController: UITableViewController {
     }
 }
 
-extension TaskListTableViewController {
+
+extension TaskTableViewController: TaskViewControllerDelegate {
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        guard let taskVC = segue.destination as? TaskViewController else { return }
+        guard segue.identifier == "editingTask" else { return }
+        guard let indexPath = tableView.indexPathForSelectedRow else { return }
+        let taskToEdit = list.tasks?[indexPath.row]
+        taskVC.currentTask = taskToEdit
+        taskVC.delegate = self
+    }
     
+    func updateList(with task: Task) {
+        guard let indexPath = tableView.indexPathForSelectedRow else { return }
+        var taskToEdit = list.tasks?[indexPath.row]
+        taskToEdit = task
+        debugPrint(taskToEdit ?? "")
+//        list.tasks?.append(task)
+        tableView.reloadData()
+    }
+
 }
