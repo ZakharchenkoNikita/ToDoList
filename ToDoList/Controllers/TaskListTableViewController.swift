@@ -18,8 +18,24 @@ class TaskListTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     }
+    // MARK: - Navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let taskTableVC = segue.destination as? TaskTableViewController else { return }
+        guard let indexPath = tableView.indexPathForSelectedRow else { return }
+        
+        let list = lists[indexPath.row]
+        taskTableVC.list = list
+        taskTableVC.delegate = self
+    }
+    
+    @IBAction func addListButtonPressed(_ sender: UIBarButtonItem) {
+        addNewList()
+    }
+}
 
-    // MARK: - Table view data source
+// MARK: - Table view data source
+extension TaskListTableViewController {
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         lists.count
     }
@@ -40,19 +56,16 @@ class TaskListTableViewController: UITableViewController {
         
         return cell
     }
+}
 
-    // MARK: - Navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard let taskTableVC = segue.destination as? TaskTableViewController else { return }
+// MARK: - TaskTableViewControllerDelegate
+extension TaskListTableViewController: TaskTableViewControllerDelegate {
+    func saveData(ToDoList: ToDoList) {
         guard let indexPath = tableView.indexPathForSelectedRow else { return }
         
-        let list = lists[indexPath.row]
-        taskTableVC.list = list
-        taskTableVC.delegate = self
-    }
-    
-    @IBAction func addListButtonPressed(_ sender: UIBarButtonItem) {
-        addNewList()
+        lists.remove(at: indexPath.row)
+        lists.insert(ToDoList, at: indexPath.row)
+        tableView.reloadData()
     }
 }
 
@@ -84,16 +97,5 @@ extension TaskListTableViewController {
     
     private func addNewTaskList() {
         
-    }
-}
-
-// MARK: - TaskTableViewControllerDelegate
-extension TaskListTableViewController: TaskTableViewControllerDelegate {
-    func saveData(ToDoList: ToDoList) {
-        guard let indexPath = tableView.indexPathForSelectedRow else { return }
-        
-        lists.remove(at: indexPath.row)
-        lists.insert(ToDoList, at: indexPath.row)
-        tableView.reloadData()
     }
 }
