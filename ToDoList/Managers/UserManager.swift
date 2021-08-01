@@ -12,18 +12,7 @@ class UserManager {
     
     var lists: [ToDoList] = [ToDoList(name: "Ваш первый список",
                                       tasks: [Task(title: "Ваша первая задача",
-                                                   isDone: false),
-                                              Task(title: "Test",
-                                                   isDone: false),
-                                              Task(title: "Test1",
-                                                   isDone: false)]),
-                             ToDoList(name: "Ваш второй список",
-                                                               tasks: [Task(title: "Ваша вторая задача",
-                                                                            isDone: false),
-                                                                       Task(title: "Test",
-                                                                            isDone: false),
-                                                                       Task(title: "Test1",
-                                                                            isDone: false)])]
+                                                   isDone: false)])]
     
     private init() {}
 }

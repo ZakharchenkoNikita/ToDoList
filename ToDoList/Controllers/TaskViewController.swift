@@ -35,8 +35,8 @@ class TaskViewController: UIViewController {
         
         switch segueIdentifire {
         case "addTask":
-            let newTask = Task(title: title, isDone: false)
-            delegate.createTask(task: newTask)
+            currentTask = Task(title: title, isDone: false)
+            delegate.createTask(task: currentTask)
         default:
             delegate.updateTask(title: title)
         }

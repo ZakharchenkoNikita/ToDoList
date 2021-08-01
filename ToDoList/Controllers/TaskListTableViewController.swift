@@ -8,27 +8,30 @@
 import UIKit
 
 protocol TaskTableViewControllerDelegate {
-    func saveData(ToDoList: ToDoList)
+    func saveData(toDoList: ToDoList)
 }
 
 class TaskListTableViewController: UITableViewController {
     
     var lists = ToDoList.getToDoLists()
     
+    var list2: [ToDoList] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         navigationItem.leftBarButtonItem = editButtonItem
     }
+
+    override func viewWillAppear(_ animated: Bool) {
+        print(lists)
+    }
     
-    // MARK: - Navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard let taskTableVC = segue.destination as? TaskTableViewController else { return }
-        guard let indexPath = tableView.indexPathForSelectedRow else { return }
-        
-        let list = lists[indexPath.row]
-        taskTableVC.list = list
-        taskTableVC.delegate = self
+    override func viewDidAppear(_ animated: Bool) {
+        print("Был пустым \(list2)")
+        print(lists)
+    }
+    
+    @IBAction func unwindSegue(_ unwindSegue: UIStoryboardSegue) {
     }
     
     @IBAction func addListButtonPressed(_ sender: UIBarButtonItem) {
@@ -80,11 +83,13 @@ extension TaskListTableViewController {
 
 // MARK: - TaskTableViewControllerDelegate
 extension TaskListTableViewController: TaskTableViewControllerDelegate {
-    func saveData(ToDoList: ToDoList) {
+    func saveData(toDoList: ToDoList) {
         guard let indexPath = tableView.indexPathForSelectedRow else { return }
 
         lists.remove(at: indexPath.row)
-        lists.insert(ToDoList, at: indexPath.row)
+        lists.insert(toDoList, at: indexPath.row)
+        
+        list2.append(toDoList)
         tableView.reloadData()
     }
 }
@@ -114,8 +119,16 @@ extension TaskListTableViewController {
         
         present(alert, animated: true, completion: nil)
     }
-    
-    private func addNewTaskList() {
+}
+
+// MARK: - Navigation
+extension TaskListTableViewController {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let taskTableVC = segue.destination as? TaskTableViewController else { return }
+        guard let indexPath = tableView.indexPathForSelectedRow else { return }
         
+        let list = lists[indexPath.row]
+        taskTableVC.list = list
+        taskTableVC.delegate = self
     }
 }
