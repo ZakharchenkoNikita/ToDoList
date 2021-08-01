@@ -15,6 +15,12 @@ class TaskListTableViewController: UITableViewController {
     
     var lists = ToDoList.getToDoLists()
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        navigationItem.leftBarButtonItem = editButtonItem
+    }
+    
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let taskTableVC = segue.destination as? TaskTableViewController else { return }
@@ -53,6 +59,22 @@ extension TaskListTableViewController {
         cell.contentConfiguration = content
         
         return cell
+    }
+}
+
+// MARK: - Table view delegate
+extension TaskListTableViewController {
+    override func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+        .none
+    }
+    
+    override func tableView(_ tableView: UITableView, shouldIndentWhileEditingRowAt indexPath: IndexPath) -> Bool {
+        false
+    }
+    
+    override func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        let currentList = lists.remove(at: sourceIndexPath.row)
+        lists.insert(currentList, at: destinationIndexPath.row)
     }
 }
 
