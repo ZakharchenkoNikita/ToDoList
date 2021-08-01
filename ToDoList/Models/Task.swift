@@ -6,6 +6,8 @@
 //
 
 struct Task {
-    let title: String
-    let isDone: Bool
+    var title: String
+    var isDone: Bool
 }
+
+

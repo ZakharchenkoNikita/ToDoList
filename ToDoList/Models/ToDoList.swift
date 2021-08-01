@@ -7,5 +7,13 @@
 
 struct ToDoList {
     let name: String
-    let tasks: [Task]
+    var tasks: [Task]
+}
+
+extension ToDoList {
+    
+    // Возвращает массив со списками задач
+    static func getToDoLists() -> [ToDoList] {
+        UserManager.shared.lists
+    }
 }
