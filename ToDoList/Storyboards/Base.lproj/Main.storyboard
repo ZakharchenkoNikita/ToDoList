@@ -142,6 +142,12 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="pZG-qG-l7c">
+                        <barButtonItem key="leftBarButtonItem" title="Назад" style="done" id="fpz-me-ble">
+                            <connections>
+                                <action selector="backButtonPressed:" destination="7Yx-wz-3zp" id="Tei-0M-0hb"/>
+                                <segue destination="d2K-3p-p2Z" kind="unwind" unwindAction="unwindSegue:" id="hYt-MT-GUe"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Item" image="pencil" catalog="system" style="done" id="tMf-Gc-SrT">
                             <connections>
                                 <segue destination="qJZ-3H-Q8z" kind="show" identifier="addTask" id="9qP-qH-BVs"/>
@@ -150,6 +156,7 @@
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LZ0-Ug-fe0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="d2K-3p-p2Z" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="778" y="50"/>
         </scene>

@@ -13,18 +13,13 @@ protocol TaskViewControllerDelegate {
 }
 
 class TaskTableViewController: UITableViewController {
-
+    
     var list: ToDoList!
     var delegate: TaskTableViewControllerDelegate!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         title = list.name
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(true)
-        delegate.saveData(ToDoList: list)
     }
     
     // MARK: - Table view data source
@@ -57,6 +52,7 @@ class TaskTableViewController: UITableViewController {
             default:
                 self.getRowPostiton(indexPath: indexPath, isDone: status)
             }
+            self.delegate.saveData(toDoList: self.list)
             self.tableView.reloadData()
         }
         
@@ -77,13 +73,19 @@ class TaskTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let delete = UIContextualAction(style: .normal, title: nil) { _, _, _ in
             self.list.tasks.remove(at: indexPath.row)
+            self.delegate.saveData(toDoList: self.list)
             self.tableView.reloadData()
         }
         delete.image = UIImage(systemName: "trash.fill")
         delete.backgroundColor = #colorLiteral(red: 0.7450980544, green: 0.1568627506, blue: 0.07450980693, alpha: 1)
         return UISwipeActionsConfiguration(actions: [delete])
     }
-
+    
+    
+    @IBAction func backButtonPressed(_ sender: UIBarButtonItem) {
+        delegate.saveData(toDoList: list)
+    }
+    
     // MARK: Private Methods
     private func getRowPostiton(indexPath: IndexPath, isDone: Bool) {
         var element = list.tasks.remove(at: indexPath.row)
@@ -101,6 +103,22 @@ class TaskTableViewController: UITableViewController {
 
 
 extension TaskTableViewController: TaskViewControllerDelegate {
+    func updateTask(title: String) {
+        guard let indexPath = tableView.indexPathForSelectedRow else { return }
+        list.tasks[indexPath.row].title = title
+        delegate.saveData(toDoList: list)
+        tableView.reloadData()
+    }
+    
+    func createTask(task: Task) {
+        list.tasks.insert(task, at: 0)
+        delegate.saveData(toDoList: list)
+        tableView.reloadData()
+    }
+}
+
+// MARK: Navigation
+extension TaskTableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let identifier = segue.identifier,
               let taskVC = segue.destination as? TaskViewController else { return }
@@ -117,17 +135,5 @@ extension TaskTableViewController: TaskViewControllerDelegate {
         }
         
         taskVC.segueIdentifire = identifier
-    }
-
-    func updateTask(title: String) {
-        guard let indexPath = tableView.indexPathForSelectedRow else { return }
-        
-        list.tasks[indexPath.row].title = title
-        tableView.reloadData()
-    }
-    
-    func createTask(task: Task) {
-        list.tasks.insert(task, at: 0)
-        tableView.reloadData()
     }
 }
