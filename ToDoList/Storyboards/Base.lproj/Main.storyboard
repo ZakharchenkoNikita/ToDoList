@@ -58,7 +58,7 @@
                                     <action selector="addListButtonPressed:" destination="rHL-XD-oT4" id="RSn-Uz-yed"/>
                                 </connections>
                             </barButtonItem>
-                            <barButtonItem image="star" catalog="system" id="z9d-8t-sSk">
+                            <barButtonItem image="star" catalog="system" style="done" id="z9d-8t-sSk">
                                 <connections>
                                     <segue destination="rTH-pX-rDj" kind="show" id="KH0-yH-9ar"/>
                                 </connections>
@@ -74,16 +74,16 @@
         <scene sceneID="A7U-ZB-Jnm">
             <objects>
                 <tableViewController id="rTH-pX-rDj" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="WXU-sb-3p7">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="WXU-sb-3p7">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="defaultTasks" id="ZSI-be-0yL">
-                                <rect key="frame" x="0.0" y="24.5" width="414" height="43.5"/>
+                                <rect key="frame" x="0.0" y="24.5" width="414" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ZSI-be-0yL" id="1ol-RH-Jyx">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -108,15 +108,31 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="task" id="pua-vT-ZG8">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="task" textLabel="NMa-6F-imR" detailTextLabel="3Ur-P8-IEJ" style="IBUITableViewCellStyleValue1" id="pua-vT-ZG8">
                                 <rect key="frame" x="0.0" y="24.5" width="414" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="pua-vT-ZG8" id="hpq-ru-8UX">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="NMa-6F-imR">
+                                            <rect key="frame" x="20" y="15" width="25" height="14.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="0.0"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="3Ur-P8-IEJ">
+                                            <rect key="frame" x="361" y="15" width="33" height="14.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="0.0"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <segue destination="qJZ-3H-Q8z" kind="show" id="Fje-VA-YRW"/>
+                                    <segue destination="qJZ-3H-Q8z" kind="show" identifier="editingTask" id="Fje-VA-YRW"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -125,7 +141,13 @@
                             <outlet property="delegate" destination="7Yx-wz-3zp" id="6Ht-Za-7pk"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="pZG-qG-l7c"/>
+                    <navigationItem key="navigationItem" id="pZG-qG-l7c">
+                        <barButtonItem key="rightBarButtonItem" title="Item" image="pencil" catalog="system" style="done" id="tMf-Gc-SrT">
+                            <connections>
+                                <segue destination="qJZ-3H-Q8z" kind="show" identifier="addTask" id="9qP-qH-BVs"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LZ0-Ug-fe0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -139,18 +161,18 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="e5A-XC-UFT">
-                                <rect key="frame" x="20" y="160" width="374" height="19.5"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Введите вашу задау" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="e5A-XC-UFT">
+                                <rect key="frame" x="20" y="160" width="374" height="25.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="LH2-tu-T9d"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="LH2-tu-T9d" firstAttribute="trailing" secondItem="e5A-XC-UFT" secondAttribute="trailing" constant="20" id="AjJ-80-Xkv"/>
+                            <constraint firstItem="LH2-tu-T9d" firstAttribute="trailing" relation="lessThanOrEqual" secondItem="e5A-XC-UFT" secondAttribute="trailing" constant="20" id="AjJ-80-Xkv"/>
                             <constraint firstItem="e5A-XC-UFT" firstAttribute="centerX" secondItem="DEe-3C-BRJ" secondAttribute="centerX" id="Yyr-o5-jXL"/>
-                            <constraint firstItem="e5A-XC-UFT" firstAttribute="leading" secondItem="LH2-tu-T9d" secondAttribute="leading" constant="20" id="i8X-wf-WtD"/>
+                            <constraint firstItem="e5A-XC-UFT" firstAttribute="leading" relation="lessThanOrEqual" secondItem="LH2-tu-T9d" secondAttribute="leading" constant="20" id="i8X-wf-WtD"/>
                             <constraint firstItem="e5A-XC-UFT" firstAttribute="top" secondItem="LH2-tu-T9d" secondAttribute="top" constant="20" id="rUS-NR-N1m"/>
                         </constraints>
                     </view>
@@ -177,7 +199,11 @@
             <point key="canvasLocation" x="-917" y="50"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="9qP-qH-BVs"/>
+    </inferredMetricsTieBreakers>
     <resources>
+        <image name="pencil" catalog="system" width="128" height="113"/>
         <image name="star" catalog="system" width="128" height="116"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
