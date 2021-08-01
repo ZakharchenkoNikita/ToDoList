@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol TaskTableViewControllerDelegate {
+    func saveData(ToDoList: ToDoList)
+}
+
 class TaskListTableViewController: UITableViewController {
 
     var lists = ToDoList.getToDoLists()
@@ -28,7 +32,7 @@ class TaskListTableViewController: UITableViewController {
         
         content.image = UIImage(systemName: "list.triangle")
         content.text = list.name
-        if let taskCount = list.tasks?.count {
+        if let taskCount = list.tasks?.count, taskCount > 0 {
             content.secondaryText = String(taskCount)
         }
         
@@ -37,41 +41,6 @@ class TaskListTableViewController: UITableViewController {
         return cell
     }
 
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let taskTableVC = segue.destination as? TaskTableViewController else { return }
@@ -79,6 +48,7 @@ class TaskListTableViewController: UITableViewController {
         
         let list = lists[indexPath.row]
         taskTableVC.list = list
+        taskTableVC.delegate = self
     }
     
     @IBAction func addListButtonPressed(_ sender: UIBarButtonItem) {
@@ -86,6 +56,7 @@ class TaskListTableViewController: UITableViewController {
     }
 }
 
+// MARK: - Private Methods
 extension TaskListTableViewController {
     private func addNewList() {
         let alert = UIAlertController(title: "Новый список", message: nil, preferredStyle: .alert)
@@ -113,5 +84,16 @@ extension TaskListTableViewController {
     
     private func addNewTaskList() {
         
+    }
+}
+
+// MARK: - TaskTableViewControllerDelegate
+extension TaskListTableViewController: TaskTableViewControllerDelegate {
+    func saveData(ToDoList: ToDoList) {
+        guard let indexPath = tableView.indexPathForSelectedRow else { return }
+        
+        lists.remove(at: indexPath.row)
+        lists.insert(ToDoList, at: indexPath.row)
+        tableView.reloadData()
     }
 }
