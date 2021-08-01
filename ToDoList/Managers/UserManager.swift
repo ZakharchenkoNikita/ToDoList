@@ -8,9 +8,15 @@
 import Foundation
 
 class UserManager {
-    let shared = UserManager()
+    static let shared = UserManager()
     
-    
+    var lists: [ToDoList] = [ToDoList(name: "Ваш первый список",
+                                      tasks: [Task(title: "Ваша первая задача",
+                                                   isDone: false),
+                                              Task(title: "Test",
+                                                   isDone: false),
+                                              Task(title: "Test1",
+                                                   isDone: false)])]
     
     private init() {}
 }

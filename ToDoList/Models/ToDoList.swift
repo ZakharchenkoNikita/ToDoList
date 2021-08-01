@@ -7,14 +7,13 @@
 
 struct ToDoList {
     let name: String
-    let tasks: [Task]
+    var tasks: [Task]?
 }
 
 extension ToDoList {
     
     // Возвращает массив со списками задач
     static func getToDoLists() -> [ToDoList] {
-        [ToDoList(name: "Current", tasks: Task.CurrentTasks),
-         ToDoList(name: "Week", tasks: Task.WeeekTasks)]
+        UserManager.shared.lists
     }
 }

@@ -9,7 +9,7 @@ import UIKit
 
 class TaskListTableViewController: UITableViewController {
 
-    let lists = ToDoList.getToDoLists()
+    var lists = ToDoList.getToDoLists()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,7 +28,9 @@ class TaskListTableViewController: UITableViewController {
         
         content.image = UIImage(systemName: "list.triangle")
         content.text = list.name
-        content.secondaryText = String(list.tasks.count)
+        if let taskCount = list.tasks?.count {
+            content.secondaryText = String(taskCount)
+        }
         
         cell.contentConfiguration = content
         
@@ -70,16 +72,46 @@ class TaskListTableViewController: UITableViewController {
     }
     */
 
-    /*
     // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+        guard let taskTableVC = segue.destination as? TaskTableViewController else { return }
+        guard let indexPath = tableView.indexPathForSelectedRow else { return }
+        
+        let list = lists[indexPath.row]
+        taskTableVC.list = list
     }
-    */
     
     @IBAction func addListButtonPressed(_ sender: UIBarButtonItem) {
+        addNewList()
+    }
+}
+
+extension TaskListTableViewController {
+    private func addNewList() {
+        let alert = UIAlertController(title: "Новый список", message: nil, preferredStyle: .alert)
+
+        
+        alert.addTextField { newListTF in
+            newListTF.placeholder = "Введите название списка..."
+            newListTF.returnKeyType = .done
+        }
+        
+        let cancelAction = UIAlertAction(title: "Отмена", style: .cancel, handler: nil)
+        let addAction = UIAlertAction(title: "Добавить", style: .default) { _ in
+            guard let textField = alert.textFields?.first else { return }
+            guard let name = textField.text, !name.isEmpty else { return }
+            
+            self.lists.insert(ToDoList(name: name, tasks: nil), at: 0)
+            self.tableView.reloadData()
+        }
+        
+        alert.addAction(addAction)
+        alert.addAction(cancelAction)
+        
+        present(alert, animated: true, completion: nil)
+    }
+    
+    private func addNewTaskList() {
+        
     }
 }
